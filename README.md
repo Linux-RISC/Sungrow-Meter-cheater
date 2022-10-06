@@ -48,3 +48,5 @@ fe03 003f 0001 a009<br>
 0x0000: starting address=0<br>
 0x0001: number of registers=1<br>
 0xc370: CRC-16<br>
+
+Does anyone know how to answer properly ?
