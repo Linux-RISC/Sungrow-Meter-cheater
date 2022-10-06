@@ -1,4 +1,4 @@
-# Sungrow-Meter
+# Sungrow-Meter-cheater
 Sungrow S100 power meter emulation using a Raspberry Pi
 
 #### Project objectives
