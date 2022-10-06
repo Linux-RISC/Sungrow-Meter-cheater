@@ -31,3 +31,10 @@ pi@raspberrypi:~ $ ./read.sh
 000000a0: fe03 003f 0001 a009 2073 0000 0001 c370  ...?.... s.....p
 000000b0: fe03 003f 0001 a009 2073 0000 0001 c370  ...?.... s.....p
 ```
+Translation: use the Modicon Modbus Protocol Reference Guide https://www.modbus.org/docs/PI_MBUS_300.pdf
+fe03 003f 0001 a009
+0xFE: station=254
+0x03: message "Read Holding Registers"
+0x003F: starting address=63
+0x0001: number of registers=1
+0x0a009: CRC-16
