@@ -55,10 +55,10 @@ Does anyone know how to answer properly ?
 
 ----------
 #### 2022-10-09 Update
-Just use the script teaser.sh to read the requests from the the inverter and answer using false data. I need to know what data is every MODBUS holding register:
+Just use the script cheater.sh to read the requests from the the inverter and answer using false data. I need to know what data is every MODBUS holding register:
 
 ```
-pi@raspberrypi:~ $ ./teaser.sh 
+pi@raspberrypi:~ $ ./cheater.sh 
 answering to fe03003f0001a009
 answering to fe03016400081020
 answering to fe03000a000c71c2
