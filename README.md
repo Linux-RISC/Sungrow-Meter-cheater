@@ -54,7 +54,7 @@ fe03 003f 0001 a009<br>
 Does anyone know how to answer properly ?
 
 ----------
-2022-10-09 Updata
+#### 2022-10-09 Update
 Just use the script teaser.sh to read the requests from the the inverter and answer using false data. I need to know what data is every MODBUS holding register:
 
 ```
