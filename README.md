@@ -9,6 +9,7 @@ This is a research project that aims to emulate a Sungrow Meter S100
 2. A Raspberry Pi, I'm using a Raspberry Pi 3B+ and a 2 GB SD card
 3. Raspberry Pi OS Lite, I'm using 32-bit: https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-32-bit
 4. A 485 dongle, I'm using a ARCELI USB to 485 adapter: https://amzn.eu/d/59K0N9B
+5. Install and start picocom (picocom /dev/sttyUSB0) on Raspberry Pi on a separate ssh session. I still don't know why, but some stty option is missing and picocom enables it.
 
 #### Installation
 Connect two wires from COM2 terminals (A2,B2) to 485 adapter terminals (D+,D-). Read the documentation of you inverter, I have used the page 20 of this manual:  https://aus.sungrowpower.com/upload/file/20210707/SG2.0-6.0RS-UEN-Ver11-202106.pdf
@@ -30,6 +31,7 @@ pi@raspberrypi:~ $ ./read.sh
 00000090: fe03 003f 0001 a009 2073 0000 0001 c370  ...?.... s.....p
 000000a0: fe03 003f 0001 a009 2073 0000 0001 c370  ...?.... s.....p
 000000b0: fe03 003f 0001 a009 2073 0000 0001 c370  ...?.... s.....p
+...
 ```
 Translation:
 - these frames are received every 20 seconds
@@ -50,3 +52,32 @@ fe03 003f 0001 a009<br>
 0xc370: CRC-16<br>
 
 Does anyone know how to answer properly ?
+
+----------
+2022-10-09 Updata
+Just use the script teaser.sh to read the requests from the the inverter and answer using false data. I need to know what data is every MODBUS holding register:
+
+```
+pi@raspberrypi:~ $ ./teaser.sh 
+answering to fe03003f0001a009
+answering to fe03016400081020
+answering to fe03000a000c71c2
+answering to fe03016400081020
+answering to fe0300610003401a
+answering to fe03016400081020
+answering to fe0300770001201f
+answering to fe03016400081020
+answering to fe03016400081020
+answering to fe03016400081020
+answering to fe03016400081020
+answering to fe03016400081020
+answering to fe03016400081020
+answering to fe03016400081020
+answering to fe03016400081020
+answering to fe03016400081020
+answering to fe03016400081020
+answering to fe03016400081020
+...
+```
+
+Check "Issues" section to watch pictures showing false data.
