@@ -81,3 +81,12 @@ answering to fe03016400081020
 ```
 
 Check "Issues" section to watch pictures showing false data.
+
+----------
+#### 2022-10-11 Update
+You can generate your own MODBUS answers and calculate the CRC-16 usign the script calc_crc16.sh, for example:
+
+```
+$ ./calc_crc16.sh fe0301640008
+1020
+```
