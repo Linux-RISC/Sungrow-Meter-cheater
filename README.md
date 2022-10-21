@@ -28,7 +28,7 @@ screen -t "cheater.sh" ./cheater.sh
 detach
 ```
 
-2. Copy these files on /home/pi
+2. Copy these files on /home/pi/cheater
 ```
 cheater.sh
 Shelly_get_em0.sh
