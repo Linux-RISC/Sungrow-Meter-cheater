@@ -14,79 +14,64 @@ This is a research project that aims to emulate a Sungrow Meter S100
 #### Installation
 Connect two wires from COM2 terminals (A2,B2) to 485 adapter terminals (D+,D-). Read the documentation of you inverter, I have used the page 20 of this manual:  https://aus.sungrowpower.com/upload/file/20210707/SG2.0-6.0RS-UEN-Ver11-202106.pdf
 
-#### Listening to the inverter
-1. Connect to the Raspberry using ssh (for example Putty on Windows or ssh on Linux) 
-2. Use the script read.sh to read the requests from the inverter:
+#### Configuring /home/pi
+1. Create a .screenrc file on /home/pi with this content:
 ```
-pi@raspberrypi:~ $ ./read.sh 
-00000000: fe03 003f 0001 a009 2073 0000 0001 c370  ...?.... s.....p
-00000010: fe03 003f 0001 a009 2073 0000 0001 c370  ...?.... s.....p
-00000020: fe03 003f 0001 a009 2073 0000 0001 c370  ...?.... s.....p
-00000030: fe03 003f 0001 a009 2073 0000 0001 c370  ...?.... s.....p
-00000040: fe03 003f 0001 a009 2073 0000 0001 c370  ...?.... s.....p
-00000050: fe03 003f 0001 a009 2073 0000 0001 c370  ...?.... s.....p
-00000060: fe03 003f 0001 a009 2073 0000 0001 c370  ...?.... s.....p
-00000070: fe03 003f 0001 a009 2073 0000 0001 c370  ...?.... s.....p
-00000080: fe03 003f 0001 a009 2073 0000 0001 c370  ...?.... s.....p
-00000090: fe03 003f 0001 a009 2073 0000 0001 c370  ...?.... s.....p
-000000a0: fe03 003f 0001 a009 2073 0000 0001 c370  ...?.... s.....p
-000000b0: fe03 003f 0001 a009 2073 0000 0001 c370  ...?.... s.....p
+# don't display the copyright page
+startup_message off
+
+# cheater.sh
+chdir /home/pi/cheater
+screen -t "cheater.sh" ./cheater.sh
+
+# return to shell
+detach
+```
+
+2. Copy these files on /home/pi
+```
+cheater.sh
+Shelly_get_em0.sh
+calc_crc16.sh
+```
+
+#### Configuring crontab for 'pi' user
+1. Run "crontab -e" and add:
+```
+@reboot screen -d -m
+```
+
+2. Reboot and run "screen -r" to check if the communication is working:
+```
+answer=FE0310000000D80000000000000000000000D8E0DA (216 W)
+answering to fe03016400081020
+answer=FE0310000000D80000000000000000000000D8E0DA (216 W)
+answering to fe03016400081020
+answer=FE0310000000D80000000000000000000000D8E0DA (216 W)
+answering to fe03016400081020
+answer=FE0310000000D80000000000000000000000D8E0DA (216 W)
+unknown request fffe030164000810
+answering to fe03016400081020
+answer=FE0310000000DA0000000000000000000000DA6659 (218 W)
+answering to fe03016400081020
+answer=FE0310000000DB0000000000000000000000DBA518 (219 W)
+unknown request fffe030164000810
+answering to fe03016400081020
+answer=FE0310000000DB0000000000000000000000DBA518 (219 W)
+answering to fe03016400081020
+answer=FE0310000000DE0000000000000000000000DE691E (222 W)
+answering to fe03016400081020
+answer=FE0310000000DE0000000000000000000000DE691E (222 W)
+answering to fe03016400081020
+answer=FE0310000000DD0000000000000000000000DD2CDC (221 W)
+answering to fe03016400081020
+answer=FE0310000000DD0000000000000000000000DD2CDC (221 W)
+answering to fe03016400081020
+answer=FE0310000000DD0000000000000000000000DD2CDC (221 W)
+answering to fe03016400081020
+answer=FE0310000000DD0000000000000000000000DD2CDC (221 W)
+answering to fe03016400081020
+answer=FE0310000000D90000000000000000000000D9239B (217 W)
+unknown request 207300000001c370
 ...
-```
-Translation:
-- these frames are received every 20 seconds
-- use the Modicon Modbus Protocol Reference Guide https://www.modbus.org/docs/PI_MBUS_300.pdf
-
-fe03 003f 0001 a009<br>
-0xFE: station=254<br>
-0x03: message "Read Holding Registers"<br>
-0x003F: starting address=63<br>
-0x0001: number of registers=1<br>
-0x0a009: CRC-16<br>
-
-2073 0000 0001 c370<br>
-0x20: station=32<br>
-0x73: message ??? --> message 0x73 doesn't exist in the Modicon Modbus Protocol Reference Guide<br>
-0x0000: starting address=0<br>
-0x0001: number of registers=1<br>
-0xc370: CRC-16<br>
-
-Does anyone know how to answer properly ?
-
-----------
-#### 2022-10-09 Update
-Just use the script cheater.sh to read the requests from the the inverter and answer using false data. I need to know what data is every MODBUS holding register:
-
-```
-pi@raspberrypi:~ $ ./cheater.sh 
-answering to fe03003f0001a009
-answering to fe03016400081020
-answering to fe03000a000c71c2
-answering to fe03016400081020
-answering to fe0300610003401a
-answering to fe03016400081020
-answering to fe0300770001201f
-answering to fe03016400081020
-answering to fe03016400081020
-answering to fe03016400081020
-answering to fe03016400081020
-answering to fe03016400081020
-answering to fe03016400081020
-answering to fe03016400081020
-answering to fe03016400081020
-answering to fe03016400081020
-answering to fe03016400081020
-answering to fe03016400081020
-...
-```
-
-Check "Issues" section to watch pictures showing false data.
-
-----------
-#### 2022-10-11 Update
-You can generate your own MODBUS answers and calculate the CRC-16 usign the script calc_crc16.sh, for example:
-
-```
-$ ./calc_crc16.sh fe0301640008
-1020
 ```
