@@ -41,7 +41,12 @@ calc_crc16.sh
 @reboot screen -d -m
 ```
 
-2. Reboot and run "screen -r" to check if the communication is working:
+2. Not mandatory but recommended: run "sudo crontab -e" and add:
+```
+0 4   *       *       *       /sbin/reboot
+```
+
+3. Reboot and run "screen -r" to check if the communication is working:
 ```
 answer=FE0310000000D80000000000000000000000D8E0DA (216 W)
 answering to fe03016400081020
@@ -62,4 +67,4 @@ answering to fe03016400081020
 ...
 ```
 
-3. Exit from screen command using the sequence (Control+a)+d
+4. Exit from screen command using the sequence (Control+a)+d
