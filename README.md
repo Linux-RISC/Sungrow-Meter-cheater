@@ -9,7 +9,7 @@ This is a research project that aims to emulate a Sungrow Meter S100
 2. A Raspberry Pi, I'm using a Raspberry Pi 3B+ and a 2 GB SD card
 3. Raspberry Pi OS Lite, I'm using 32-bit: https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-32-bit
 4. A 485 dongle, I'm using a ARCELI USB to 485 adapter: https://amzn.eu/d/59K0N9B
-5. Install and start picocom (picocom /dev/sttyUSB0) on Raspberry Pi on a separate ssh session. I still don't know why, but some stty option is missing and picocom enables it.
+5. Install the required software: sudo apt install screen stty curl jq
 
 #### Installation
 Connect two wires from COM2 terminals (A2,B2) to 485 adapter terminals (D+,D-). Read the documentation of you inverter, I have used the page 20 of this manual:  https://aus.sungrowpower.com/upload/file/20210707/SG2.0-6.0RS-UEN-Ver11-202106.pdf
