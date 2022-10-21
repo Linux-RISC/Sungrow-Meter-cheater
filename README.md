@@ -61,3 +61,5 @@ answer=FE0310000000DB0000000000000000000000DBA518 (219 W)
 answering to fe03016400081020
 ...
 ```
+
+3. Exit from screen command using the sequence (Control+a)+d
