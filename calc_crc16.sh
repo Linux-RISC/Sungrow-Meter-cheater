@@ -4,9 +4,9 @@
 
 # References:
 # https://ctlsys.com/support/how_to_compute_the_modbus_rtu_message_crc/
-# https://github.com/onslauth/bash_crc16 
+# https://github.com/onslauth/bash_crc16
 # https://stackoverflow.com/questions/8564267/crc16-algorithm-from-c-to-bash
-# https://crccalc.com/ 
+# https://crccalc.com/
 
 function calc_crc16() {
 

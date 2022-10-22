@@ -81,7 +81,11 @@ do
 
       # debugging
       #echo "hex="$hex
-      answer="FE03100000"$hex"00000000000000000000"$hex
+      if (( power<0 )); then
+         answer="FE0310"$hex"0000000000000000"$hex
+      else
+         answer="FE03100000"$hex"00000000000000000000"$hex
+      fi
       #echo "answer="$answer
       ./calc_crc16.sh $answer | read CRC
       answer=$answer$CRC
