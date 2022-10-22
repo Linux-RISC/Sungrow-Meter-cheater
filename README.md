@@ -4,6 +4,18 @@ Sungrow S100 power meter emulation using a Raspberry Pi
 #### Project objectives
 This is a research project that aims to emulate a Sungrow Meter S100
 
+#### Main references
+cheater.sh
+https://github.com/meltaxa/solariot/issues/27
+https://stackoverflow.com/questions/2746553/read-values-into-a-shell-variable-from-a-pipe
+https://www.exploringbinary.com/twos-complement-converter/
+
+calc_crc16.sh
+https://ctlsys.com/support/how_to_compute_the_modbus_rtu_message_crc/
+https://github.com/onslauth/bash_crc16 
+https://stackoverflow.com/questions/8564267/crc16-algorithm-from-c-to-bash
+https://crccalc.com/ 
+
 #### Requeriments
 1. A Sungrow inverter, I'm using a SG5.0RS
 2. A Raspberry Pi, I'm using a Raspberry Pi 3B+ and a 2 GB SD card
