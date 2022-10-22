@@ -82,5 +82,8 @@ answering to fe03016400081020
 4. Exit from screen command using the sequence (Control+a)+d
 
 #### Images
+Consumption
 <img src="consumption.png" title="consumption">
+
+Trend
 <img src="trend.png" title="trend">
