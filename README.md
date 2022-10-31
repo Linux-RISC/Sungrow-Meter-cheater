@@ -20,7 +20,7 @@ https://crccalc.com/<br>
 
 #### Requeriments
 1. A Sungrow inverter, I'm using a SG5.0RS
-2. A Raspberry Pi, I'm using a Raspberry Pi 3B+ and a 2 GB SD card
+2. A Raspberry Pi, I'm using a Raspberry Pi 2 and a 2 GB SD card
 3. Raspberry Pi OS Lite, I'm using 32-bit: https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-32-bit
 4. A 485 dongle, I'm using a ARCELI USB to 485 adapter: https://amzn.eu/d/59K0N9B
 5. Install the required software: sudo apt install screen stty curl jq
