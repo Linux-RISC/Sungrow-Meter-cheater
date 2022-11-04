@@ -29,20 +29,7 @@ https://crccalc.com/<br>
 Connect two wires from COM2 terminals (A2,B2) to 485 adapter terminals (D+,D-). Read the documentation of you inverter, I have used the page 20 of this manual:  https://aus.sungrowpower.com/upload/file/20210707/SG2.0-6.0RS-UEN-Ver11-202106.pdf
 
 #### Configuring /home/pi
-1. Create a .screenrc file on /home/pi with this content:
-```
-# don't display the copyright page
-startup_message off
-
-# cheater.sh
-chdir /home/pi/cheater
-screen -t "cheater.sh" ./cheater.sh
-
-# return to shell
-detach
-```
-
-2. Copy these files to /home/pi/cheater
+1. Copy these files to /home/pi/cheater
 ```
 cheater.sh
 Shelly_get_em0.sh
@@ -52,7 +39,7 @@ calc_crc16.sh
 #### Configuring crontab for 'pi' user
 1. Run "crontab -e" and add:
 ```
-@reboot screen -d -m
+@reboot (cd /home/pi/cheater; screen -d -m ./cheater.sh)
 ```
 
 2. Not mandatory but recommended: run "sudo crontab -e" and add:
