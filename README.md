@@ -79,3 +79,10 @@ Consumption:<br>
 
 Trend:<br>
 <img src="trend.png" title="Trend">
+
+485 Connection:<br>
+<img src="connection.png" title="Connection">
+
+RBPi2:<br>
+<img src="RBPi2.png" title="RBPi2">
+
