@@ -30,16 +30,21 @@ sleep 10
 device="/dev/ttyUSB0"
 stty -F $device 9600 -parenb -parodd -cmspar cs8 -hupcl -cstopb cread clocal -crtscts -ignbrk -brkint -ignpar -parmrk -inpck -istrip -inlcr -igncr -icrnl -ixon -ixoff -iuclc -ixany -imaxbel -iutf8 -opost -olcuc -ocrnl onlcr -onocr -onlret -ofill -ofdel nl0 cr0 tab0 bs0 vt0 ff0 -isig -icanon -iexten -echo echoe echok -echonl -noflsh -xcase -tostop -echoprt echoctl echoke -flusho -extproc
 
-# register 63, 1 registers
+# https://github.com/Linux-RISC/Sungrow-Meter-cheater/issues/1 --> octera -->
+# https://github.com/bohdan-s/Sungrow-Inverter/blob/main/Modbus%20Information/DTSU666%20Meter%20Communication%20Protocol_20210601.pdf
+
+# register 63 (3FH), 1 register, address
 R63_1="fe03003f0001a009"
-# register 356, 8 registers
+# register 356 (164H), 8 registers, Active power of phase A,B,C and Total active power
 R356_8="fe03016400081020"
-# register 10, 12 registers
+# register 10 (0AH), 12 registers, Current forward active total/spike/peak/flat/valley/... electric energy
 R10_12="fe03000a000c71c2"
-# register 97, 3 registers
+# register 97 (61H), 3 registers, Voltage of A, B, C phase
 R97_3="fe0300610003401a"
-# register 119, 1 registers
+# register 119 (77H), 1 register, Frequency
 R119_1="fe0300770001201f"
+# register 20480 (5000H), 1 register
+R5000_1="fe03500000018105"
 
 while true
 do
@@ -47,8 +52,10 @@ do
   request=$(xxd -l 8 -p $device)
   case $request in
     $R63_1)
-      echo "answering to $request"
       answer="FE03020000AC50"
+      answer="FE03020020AD88"
+      answer="FE030200FE2DD0"
+      echo "answering to $request: slave 32 (20H), register 63 (3FH), 1 register, address, $answer"
       echo "$answer" | xxd -r -p > $device
       ;;
     $R356_8)
@@ -90,23 +97,29 @@ do
       #echo "answer="$answer
       ./calc_crc16.sh $answer | read CRC
       answer=$answer$CRC
-      echo "answer="$answer" ("$power" W)"
+
+      echo "answer="$answer" ("$power" W), register 356 (164H), 8 registers, Active power of phase A,B,C and Total active power, $answer"
 
       echo "$answer" | xxd -r -p > $device
       ;;
     $R10_12)
-      echo "answering to $request"
       answer="FE03180000000000000000000000000000000000000000000000006F1F"
+      echo "answering to $request: (0,0,0,0,0,0), register 10 (0AH), 12 registers, Current forward active total/spike/peak/flat/valley/... electric energy, $answer"
       echo "$answer" | xxd -r -p > $device
       ;;
     $R97_3)
-      echo "answering to $request"
       answer="FE03060000000000006481"
+      echo "answering to $request: (0,0,0), register 97 (61H), 3 registers, Voltage of A, B, C phase, $answer"
       echo "$answer" | xxd -r -p > $device
       ;;
     $R119_1)
-      echo "answering to $request"
       answer="FE03020000AC50"
+      echo "answering to $request: 0, register 119 (77H), 1 register, Frequency, $answer"
+      echo "$answer" | xxd -r -p > $device
+      ;;
+    $R5000_1)
+      answer="FE03020000AC50"
+      echo "answering to $request: 0, register 20480 (5000H), 1 register, $answer"
       echo "$answer" | xxd -r -p > $device
       ;;
     *)
