@@ -1,11 +1,13 @@
 <a href="https://www.buymeacoffee.com/rbpiuserf" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 <br>
+<br>
 Last update: 2023/12/10<br>
+<br>
 After updating my SG5.0RS to the firmware version SUNSTONE-S_B000.V001.P029-20231019.zip the inverter is lo longer requesting the register 356+8 (164H, Active power of phase A,B,C and Total active power).<br>
 But we have a new player: fe03500000018105. Register 5000H? What is that.<br>
 The script cheater.sh has been updated to answer 0, but no request for active power is received yet.<br>
 Do you know the solution? Please let me know on "issues". Thanks in advance.<br>
-
+<br>
 # Sungrow-Meter-cheater
 Sungrow S100 power meter emulation using a Raspberry Pi
 
