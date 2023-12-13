@@ -53,9 +53,12 @@ do
   case $request in
     $R63_1)
       answer="FE03020000AC50"
-      answer="FE03020020AD88"
-      answer="FE030200FE2DD0"
-      echo "answering to $request: slave 32 (20H), register 63 (3FH), 1 register, address, $answer"
+      message="answering to $request: slave 00 (00H), register 63 (3FH), 1 register, address, $answer"
+      #answer="FE03020020AD88"
+      #message="answering to $request: slave 32 (20H), register 63 (3FH), 1 register, address, $answer"
+      #answer="FE030200FE2DD0"
+      #message="answering to $request: slave 254 (FEH), register 63 (3FH), 1 register, address, $answer"
+      echo $message
       echo "$answer" | xxd -r -p > $device
       ;;
     $R356_8)
